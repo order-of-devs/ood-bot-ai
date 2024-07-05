@@ -1,4 +1,5 @@
-../heliux/scbackend/.idea/
+.idea/
+.vscode/
 venv/
 
 ### Python ###
