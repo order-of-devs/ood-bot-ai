@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "discord-bot"
+version = "0.1.0"
+description = "Discord bot for Order of Devs"
+authors = ["Mateusz Kubaszek"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pre-commit = "^3.7.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.1.1"
+ruff = "^0.4.2"
+black = "^24.4.2"
+mypy = "^1.10.0"
+pytest-cov = "^5.0.0"
+pytest-asyncio = "^0.23.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

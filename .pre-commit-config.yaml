@@ -1,0 +1,36 @@
+exclude: "docs|node_modules|migrations|.git|.tox"
+default_stages: [commit]
+fail_fast: false
+default_language_version:
+  python: python3.12
+minimum_pre_commit_version: "3.2.0"
+
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: no-commit-to-branch
+    -   id: check-merge-conflict
+    -   id: check-json
+    -   id: detect-private-key
+    -   id: check-json
+    -   id: check-toml
+    - id: debug-statements
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.3.2
+  hooks:
+      - id: ruff-format
+        args: [ --preview ]
+      - id: ruff
+        args: [ --fix, --preview, --show-fixes, --exit-non-zero-on-fix ]
+- repo: local
+  hooks:
+    - id: mypy
+      name: mypy
+      entry: poetry run mypy
+      language: system
+      types: [ python ]
+      require_serial: true
