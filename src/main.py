@@ -1,25 +1,13 @@
-# This example requires the 'message_content' intent.
-
-import discord
-from discord.ext import commands
+from bot import DiscordBot
+from src.core.config import Settings
 
 
-
-intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
-
-
-@bot.tree.command(name="paa",description="hello world command")
-async def papa(interaction):
-    await interaction.response.send_message("Hello, World!")
+def main():
+    settings = Settings()
+    initialize = DiscordBot(settings)
+    initialize()
 
 
-@bot.event
-async def on_ready():
-    print(f'Logged on as!')
-    guild = discord.Object(871795158608404530)
+if __name__ == '__main__':
+    main()
 
-    await bot.tree.sync(guild=guild)
-
-bot.run('token')
