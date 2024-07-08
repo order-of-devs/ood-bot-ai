@@ -418,13 +418,13 @@ files = [
 
 [[package]]
 name = "identify"
-version = "2.5.36"
+version = "2.6.0"
 description = "File identification library for Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "identify-2.5.36-py2.py3-none-any.whl", hash = "sha256:37d93f380f4de590500d9dba7db359d0d3da95ffe7f9de1753faa159e71e7dfa"},
-    {file = "identify-2.5.36.tar.gz", hash = "sha256:e5e00f54165f9047fbebeb4a560f9acfb8af4c88232be60a488e9b68d122745d"},
+    {file = "identify-2.6.0-py2.py3-none-any.whl", hash = "sha256:e79ae4406387a9d300332b5fd366d8994f1525e8414984e1a59e058b2eda2dd0"},
+    {file = "identify-2.6.0.tar.gz", hash = "sha256:cb171c685bdc31bcc4c1734698736a7d5b6c8bf2e0c15117f4d469c8640ae5cf"},
 ]
 
 [package.extras]
@@ -607,25 +607,6 @@ files = [
     {file = "mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d"},
     {file = "mypy_extensions-1.0.0.tar.gz", hash = "sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"},
 ]
-
-[[package]]
-name = "nextcord"
-version = "2.6.0"
-description = "A Python wrapper for the Discord API forked from discord.py"
-optional = false
-python-versions = ">=3.8.0"
-files = [
-    {file = "nextcord-2.6.0.tar.gz", hash = "sha256:ccf461157be682cbceaa474e8df4afa302351b8d6ced632f9ccb7aa647b092e7"},
-]
-
-[package.dependencies]
-aiohttp = ">=3.8.0,<4.0.0"
-typing_extensions = ">=4.2.0,<5"
-
-[package.extras]
-docs = ["sphinx (==5.2.3)", "sphinxcontrib-websupport", "sphinxcontrib_trio (==1.1.2)", "typing_extensions (>=4.2.0,<5)"]
-speed = ["aiohttp[speedups]", "orjson (>=3.5.4)"]
-voice = ["PyNaCl (>=1.3.0,<1.5)"]
 
 [[package]]
 name = "nodeenv"
@@ -1144,4 +1125,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8d6b2fe6aa1f284ea6321ed8fd8d118737e805777dc3a62cd4412a3ac69873bb"
+content-hash = "b63c65664a1a931c7fa0d01fd1d4fda05238f74de2626398e055974e7bc4d103"

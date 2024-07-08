@@ -9,7 +9,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 pre-commit = "^3.7.0"
-nextcord = "^2.6.0"
 discord-py = "^2.4.0"
 pydantic = "^2.8.2"
 pydantic-settings = "^2.3.4"
