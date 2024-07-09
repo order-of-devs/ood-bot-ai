@@ -3,7 +3,7 @@
     {
         "ghcr.io":
             {
-                "auth":token"
+                "auth":"token"
             }
     }
 }
