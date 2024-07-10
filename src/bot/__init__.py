@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from typing import Any
 
 import discord
 from discord.ext import commands as discord_commands
@@ -9,24 +10,26 @@ from src.core.config import Settings
 
 
 class DiscordBot:
-    def __init__(self, settings: Settings):
+    def __init__(self, settings: Settings,
+                 ask_ai_command: AskAICommand,
+                 summarize_command: SummarizeCommand) -> None:
         intents = discord.Intents.default()
         intents.message_content = True
         self.bot = discord_commands.Bot(command_prefix="/", intents=intents)
-        self.ask_ai_command = AskAICommand()
-        self.summarize_command = SummarizeCommand()
+        self.ask_ai_command = ask_ai_command
+        self.summarize_command = summarize_command
         self.discord_token = settings.discord_token
         self.owner_userid = settings.owner_userid
         self.guild_id = settings.guild_id
 
-    def __call__(self, *args, **kwargs):
+    def register_commands(self) -> None:
         @self.bot.tree.command(name="ask_ai", description="ask ai command")
-        async def ask_ai(interaction):
+        async def ask_ai(interaction: Any) -> None:
             await self.ask_ai_command.execute(interaction.data)
             await interaction.response.send_message("Exterminate! Exterminate!")
 
         @self.bot.tree.command(name="summarize", description="summarize")
-        async def summarize(interaction):
+        async def summarize(interaction: Any) -> None:
             await self.summarize_command.execute(interaction.data)
             await interaction.response.send_message("Summarization started!")
 
@@ -51,8 +54,7 @@ class DiscordBot:
                 await interaction.response.send_message("You must be the owner to use this command!")
 
         @self.bot.command()
-        async def sync(ctx):
-            print("sync command")
+        async def sync(ctx: Any) -> None:
             if ctx.author.id == self.owner_userid:
                 guild = discord.Object(self.guild_id)
                 self.bot.tree.copy_global_to(guild=guild)
@@ -62,14 +64,5 @@ class DiscordBot:
             else:
                 await ctx.send("You must be the owner to use this command!")
 
-        # @self.bot.event
-        # async def on_message():
-        #     pass
-        #     # await message.add_reaction('👍')
-        #     # await self.bot.process_commands(message)
-
-        @self.bot.event
-        async def on_ready():
-            print("Logged on as!")
-
+    def __call__(self) -> None:
         self.bot.run(self.discord_token)

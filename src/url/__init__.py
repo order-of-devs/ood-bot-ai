@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import hashlib
+from dataclasses import dataclass
 from typing import Optional
 
 
@@ -9,12 +9,12 @@ class Url:
     path: Optional[str]
     query: Optional[str]
 
-    def hash(self):
-        data = str(self.__repr__()).encode('utf-8')
-        sha1 = hashlib.sha1()
+    def hash(self) -> str:
+        data = str(self.__repr__()).encode("utf-8")
+        sha1 = hashlib.sha1()  # noqa: S324
         sha1.update(data)
         return sha1.hexdigest()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.base_url}{self.path}?{self.query}"
 

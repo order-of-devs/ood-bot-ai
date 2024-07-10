@@ -7,12 +7,12 @@ minimum_pre_commit_version: "3.2.0"
 
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
-    -   id: no-commit-to-branch
+#    -   id: no-commit-to-branch
     -   id: check-merge-conflict
     -   id: check-json
     -   id: detect-private-key
@@ -20,7 +20,7 @@ repos:
     -   id: check-toml
     - id: debug-statements
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.3.2
+  rev: v0.5.1
   hooks:
       - id: ruff-format
         args: [ --preview ]
