@@ -16,29 +16,29 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis
+    name: redis
 spec:
-  selector:
-    matchLabels:
-      app: redis
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: redis
-        tier: database
-    spec:
-      containers:
-        - name: redis
-          image: redis
-          resources:
-            requests:
-              memory: "1Gi"
-            limits:
-              memory: "2Gi"
-          ports:
-            - containerPort: 6379
-          command: ["redis-server", "--requirepass", "$(REDIS_PASSWORD)"]
-          env:
-            - name: REDIS_PASSWORD
-              value: "dupa"
+    selector:
+        matchLabels:
+            app: redis
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: redis
+                tier: database
+        spec:
+            containers:
+                -   name: redis
+                    image: redis
+                    resources:
+                        requests:
+                            memory: "1Gi"
+                        limits:
+                            memory: "2Gi"
+                    ports:
+                        -   containerPort: 6379
+                    command: [ "redis-server", "--requirepass", "$(REDIS_PASSWORD)" ]
+                    env:
+                        -   name: REDIS_PASSWORD
+                            value: "dupa"
