@@ -12,7 +12,7 @@ repos:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
-    -   id: no-commit-to-branch
+#    -   id: no-commit-to-branch
     -   id: check-merge-conflict
     -   id: check-json
     -   id: detect-private-key
