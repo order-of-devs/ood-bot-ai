@@ -34,19 +34,21 @@ class DiscordBot:
             await interaction.response.send_message("Summarization started!")
 
         @self.bot.tree.command(name="get_messages", description="get messages from a channel for the last x days")
-        async def get_messages(interaction, channel_id: str, days: int = 1):
+        async def get_messages(interaction: Any, channel_id: str, days: int = 1) -> None:
             if interaction.user.id == self.owner_userid:
                 channel = self.bot.get_channel(int(channel_id))
                 if not channel:
                     await interaction.response.send_message("Channel not found.")
                     return
 
-                end_date = datetime.utcnow()
+                end_date = datetime.datetime.now(tz=datetime.timezone.utc)
                 start_date = end_date - timedelta(days=days)
 
                 messages = []
-                async for message in channel.history(limit=None, after=start_date, before=end_date):
-                    messages.append(f"{message.created_at}: {message.author}: {message.content}")
+                messages = [
+                    f"{message.created_at}: {message.author}: {message.content}"
+                    async for message in channel.history(limit=None, after=start_date, before=end_date)
+                ]
 
                 output_message = f"Got {len(messages)} messages from the last {days} days."
                 await interaction.response.send_message(output_message)
