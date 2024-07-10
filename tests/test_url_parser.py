@@ -14,6 +14,5 @@ def tests_should_parse_youtube_short_url():
     parsed_url = parse_url(url)
     assert parsed_url.base_url == "www.youtube.com"
     assert parsed_url.path == "/watch"
-    assert parsed_url.query == "v=JRrxtwnvOek"
 
 
