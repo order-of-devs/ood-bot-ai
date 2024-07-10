@@ -8,7 +8,6 @@ from src.url import Url
 def match_url_domain(base_url: str) -> Optional[str]:
     try:
         parsed_url = urlparse(base_url)
-
         return parsed_url.netloc
     except ValueError:
         return None
