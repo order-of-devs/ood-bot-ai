@@ -8,6 +8,7 @@ from src.core.config import Settings
 
 OWNER_USERID = 411490244660166656
 
+
 class DiscordBot:
     def __init__(self, settings: Settings):
         intents = discord.Intents.default()
