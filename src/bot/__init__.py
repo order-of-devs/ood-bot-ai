@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands as discord_commands
 
-from src.bot.commands import Command
 from src.bot.commands.ask_ai_command import AskAICommand
 from src.bot.commands.summarize_command import SummarizeCommand
 from src.core.config import Settings
@@ -13,7 +12,7 @@ class DiscordBot:
     def __init__(self, settings: Settings):
         intents = discord.Intents.default()
         intents.message_content = True
-        self.bot = discord_commands.Bot(command_prefix='/', intents=intents)
+        self.bot = discord_commands.Bot(command_prefix="/", intents=intents)
         self.ask_ai_command = AskAICommand()
         self.summarize_command = SummarizeCommand()
         self.discord_token = settings.discord_token
@@ -37,9 +36,9 @@ class DiscordBot:
                 self.bot.tree.copy_global_to(guild=guild)
                 await self.bot.tree.sync(guild=guild)
                 await self.bot.tree.sync()
-                await ctx.send('Command tree synced.')
+                await ctx.send("Command tree synced.")
             else:
-                await ctx.send('You must be the owner to use this command!')
+                await ctx.send("You must be the owner to use this command!")
 
         # @self.bot.event
         # async def on_message():
@@ -49,6 +48,6 @@ class DiscordBot:
 
         @self.bot.event
         async def on_ready():
-            print(f'Logged on as!')
+            print("Logged on as!")
 
         self.bot.run(self.discord_token)

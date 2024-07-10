@@ -1,5 +1,3 @@
-from asyncio import Task
-
 from src.storage import Storage
 from src.url.normalizer import normalize_url
 from src.url.parser import Url, parse_url
