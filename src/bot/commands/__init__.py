@@ -2,5 +2,5 @@ from typing import Protocol
 
 
 class Command(Protocol):
-    async def execute(self, command: str):
+    async def execute(self, command: str) -> None:
         pass
