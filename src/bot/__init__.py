@@ -1,9 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 import discord
 from discord.ext import commands as discord_commands
 
+from src.asserts import is_number
 from src.bot.commands.ask_ai_command import AskAICommand
 from src.bot.commands.summarize_command import SummarizeCommand
 from src.core.config import Settings
@@ -36,15 +37,18 @@ class DiscordBot:
         @self.bot.tree.command(name="get_messages", description="get messages from a channel for the last x days")
         async def get_messages(interaction: Any, channel_id: str, days: int = 1) -> None:
             if interaction.user.id == self.owner_userid:
+                if not is_number(channel_id):
+                    await interaction.response.send_message("Invalid channel ID.")
+                    return
+
                 channel = self.bot.get_channel(int(channel_id))
                 if not channel:
                     await interaction.response.send_message("Channel not found.")
                     return
 
-                end_date = datetime.datetime.now(tz=datetime.timezone.utc)
+                end_date = datetime.now(tz=UTC)
                 start_date = end_date - timedelta(days=days)
 
-                messages = []
                 messages = [
                     f"{message.created_at}: {message.author}: {message.content}"
                     async for message in channel.history(limit=None, after=start_date, before=end_date)
