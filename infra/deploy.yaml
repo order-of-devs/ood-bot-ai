@@ -19,7 +19,7 @@ kind: Deployment
 metadata:
     name: bot-deployment
 spec:
-    replicas: 1
+    replicas: 3
     selector:
         matchLabels:
             app: ai-bot
