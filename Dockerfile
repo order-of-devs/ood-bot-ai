@@ -1,27 +1,35 @@
-FROM --platform=linux/amd64 python:3.12-slim-bullseye
-RUN pip3 install poetry
-RUN apt-get update
+# Stage 1: Build stage
+FROM python:3.9-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PYTHONIOENCODING=utf-8 \
-    POETRY_NO_INTERACTION=1 \
-    POETRY_CACHE_DIR=/tmp/poetry_cache \
-    PYTHONPATH="/app:$PYTHONPATH"
-
+# Set working directory
 WORKDIR /app
 
+# Install dependencies
 COPY pyproject.toml poetry.lock ./
-RUN pip3 install --upgrade pip
-RUN poetry config virtualenvs.create false
+RUN pip install poetry && poetry install --no-dev
 
-RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
+# Copy application code
+COPY . .
 
-COPY src ./src
-COPY .env /app/src/.env
+# Stage 2: Production stage
+FROM python:3.9-slim
 
-WORKDIR /app/src
+# Set working directory
+WORKDIR /app
 
-EXPOSE 80
+# Copy only necessary files from build stage
+COPY --from=builder /app /app
 
-CMD ["python", "main.py"]
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+# Create a non-root user
+RUN useradd -m myuser
+USER myuser
+
+# Expose necessary ports
+EXPOSE 8000
+
+# Specify entry point
+ENTRYPOINT ["poetry", "run"]
+CMD ["python", "src/main.py"]
